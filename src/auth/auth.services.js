@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const postLogin = (req, res) => {
     const { email, password } = req.body
     checkUsersCredentials(email, password)
-       .then(data => {
+    .then(data => {
         if(data){
             const token = jwt.sign({
                 id: data.id,
@@ -13,13 +13,13 @@ const postLogin = (req, res) => {
             }, 'academlo', {
                 expiresIn: '1d'
             })
-             
-             response.success ({
+            
+            response.success ({
                 res,
                 status: 200,
                 message: 'Correct Credentials',
                 data: token
-             })
+            })
             } else {
                 response.error ({
                     res,
@@ -27,15 +27,15 @@ const postLogin = (req, res) => {
                     message: 'Invalid Credentials'
                 })
             }
-       })
-       .catch (err => {
+        })
+        .catch (err => {
         response.error({
             res,
             status:400,
             data: err,
             message: 'Something Bad'
         })
-       })
+    })
 }
 
 module.exports = postLogin
